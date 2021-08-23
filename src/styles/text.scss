@@ -1,0 +1,31 @@
+@for $i from 1 through 6 {
+  .text-h#{$i} {
+    @extend .text;
+    font-size: 6 * 5 - ($i * 5) + px;
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text {
+  color: #333333;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-hint {
+  font-size: 9px;
+  color: #333333;
+}
+
+.text-bold {
+  font-weight: bold;
+}

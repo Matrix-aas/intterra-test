@@ -1,0 +1,17 @@
+@for $i from 1 through 10 {
+  .ml-#{$i} {
+    margin-left: 2px * $i;
+  }
+
+  .mr-#{$i} {
+    margin-right: 2px * $i;
+  }
+
+  .mt-#{$i} {
+    margin-top: 2px * $i;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: 2px * $i;
+  }
+}

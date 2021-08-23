@@ -1,0 +1,61 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  background-color: #F9F9F9;
+}
+
+* {
+  font-family: Ubuntu, sans-serif;
+  font-size: 13px;
+}
+
+header.main {
+  height: 80px;
+  background-color: #091C28;
+}
+
+.layout {
+  margin: 0 auto;
+  min-width: 320px;
+  min-height: calc(100vh - 80px - 10px * 2);
+  padding: 10px 16px;
+  background-color: white;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    & {
+      padding: 10px 24px;
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    & {
+      padding: 10px 30px;
+      max-width: 1096px;
+    }
+  }
+}
+
+.no-mp {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-start {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+@import "btn";
+@import "text";
+@import "margins";
