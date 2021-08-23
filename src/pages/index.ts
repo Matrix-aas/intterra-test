@@ -1,6 +1,12 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 const routes = [
+  {
+    path: '/',
+    redirect: {
+      name: 'operations',
+    },
+  },
   {
     path: '/operations',
     name: 'operations',
@@ -28,7 +34,7 @@ const routes = [
       create: true,
     },
   },
-];
+] as RouteRecordRaw[];
 
 const router = createRouter({
   history: createWebHashHistory(),
