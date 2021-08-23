@@ -27,6 +27,16 @@ export default defineComponent({
 
   emits: ['update:modelValue'],
 
+  watch: {
+    modelValue(val: boolean): void {
+      document.querySelector('html')!.style.overflowY = val ? 'hidden' : 'auto';
+    },
+  },
+
+  unmounted() {
+    document.querySelector('html')!.style.overflowY = 'hidden';
+  },
+
   methods: {
     dispose(): void {
       this.$emit('update:modelValue', false);

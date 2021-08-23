@@ -2,10 +2,15 @@
   <modal v-model="createOperationModal">
     <div class="flex-col" style="height: 100%; justify-content: space-between;">
       <div>
-        <section>
-          <h2 class="text-h2 no-mp">
-            {{ form.id ? 'Обновление' : 'Добавление' }} операции
-          </h2>
+        <section class="flex-row" style="justify-content: space-between">
+          <div>
+            <h2 class="text-h2 no-mp">
+              {{ form.id ? 'Обновление' : 'Добавление' }} операции
+            </h2>
+          </div>
+          <btn plain style="color: silver; transform: scale(2, 1.2)" @click="createOperationModal = false">
+            X
+          </btn>
         </section>
 
         <section>
