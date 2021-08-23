@@ -38,7 +38,7 @@
             <select id="operation" v-model="form.operation" :disabled="loading">
               <option disabled selected value="-1">Выберите</option>
               <template v-for="(value, label) of OperationType">
-                <option v-if="isNaN(label)" :value="value" :key="value">
+                <option v-if="isNaN(Number(label))" :value="value" :key="value">
                   {{ $t(label) }}
                 </option>
               </template>
@@ -98,12 +98,12 @@ import { Assessment, OperationType } from '../../models/Operation';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
 
 export interface OperationForm {
-  id?: string | null,
-  operation: number | null,
-  date: string | null,
-  area: number | null,
-  comment?: string | null,
-  assessment?: Assessment | null,
+  id?: string,
+  operation: number,
+  date?: string,
+  area?: number,
+  comment?: string,
+  assessment?: Assessment,
 }
 
 export default defineComponent({
@@ -143,12 +143,12 @@ export default defineComponent({
       }] as Variants,
 
       form: {
-        id: null,
+        id: undefined,
         operation: -1,
-        date: null,
-        area: null,
-        comment: null,
-        assessment: null,
+        date: undefined,
+        area: undefined,
+        comment: undefined,
+        assessment: undefined,
       } as OperationForm,
 
       loading: false,
@@ -179,14 +179,16 @@ export default defineComponent({
     },
 
     $route(to: RouteLocationNormalizedLoaded) {
-      this.loadOperationData(to.params.id);
+      if (to.params.id && typeof to.params.id === 'string') {
+        this.loadOperationData(to.params.id);
+      }
     },
   },
 
   mounted() {
     this.createOperationModal = this.modelValue;
 
-    if (this.$route.params.id) {
+    if (this.$route.params.id && typeof this.$route.params.id === 'string') {
       this.loadOperationData(this.$route.params.id);
     }
   },
@@ -198,22 +200,22 @@ export default defineComponent({
     },
 
     clear(): void {
-      this.form.id = null;
+      this.form.id = undefined;
       this.form.operation = -1;
-      this.form.date = null;
-      this.form.area = null;
-      this.form.comment = null;
-      this.form.assessment = null;
+      this.form.date = undefined;
+      this.form.area = undefined;
+      this.form.comment = undefined;
+      this.form.assessment = undefined;
     },
 
-    async loadOperationData(id: number | null) {
+    async loadOperationData(id: string | null) {
       this.loading = true;
-      const operation = await this.operationsService.getOperation(id);
+      const operation = await (this as any).operationsService.getOperation(id);
       console.log(operation);
       if (operation) {
         this.form.id = operation.id;
         this.form.operation = Number(operation.type);
-        this.form.date = this.$moment(`${operation.date.day}.${operation.date.month}.${operation.date.year}`, 'DD.MM.YYYY').format('YYYY-MM-DD');
+        this.form.date = (this as any).$moment(`${operation.date.day}.${operation.date.month}.${operation.date.year}`, 'DD.MM.YYYY').format('YYYY-MM-DD');
         this.form.area = operation.area;
         this.form.comment = operation.comment;
         this.form.assessment = operation.assessment;

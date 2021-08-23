@@ -7,7 +7,7 @@
           v-for="column of columns"
           :key="column.id"
           scope="col"
-          :style="{width: column.width || 'auto', whiteSpace: column.width ? 'no-wrap' : 'normal'}"
+          :style="{width: column.width || 'auto'}"
         >
           <component
             :is="column.sortable === true ? 'btn' : 'div'"

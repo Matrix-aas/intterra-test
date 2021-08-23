@@ -5,7 +5,7 @@
       :key="index"
       type="button"
       :class="{switch: true, selected: variant.value === modelValue, disabled}"
-      :style="{width: `calc(100% / ${variants.length})`, '--bgColor': variant.color}"
+      :style="style(variant)"
       @click="clicked(variant)"
     >
       {{ variant.label }}
@@ -64,6 +64,10 @@ export default defineComponent({
       } else {
         this.$emit('update:modelValue', variant.value);
       }
+    },
+
+    style(variant: Variant): any {
+      return { width: `calc(100% / ${this.variants.length})`, '--bgColor': variant.color };
     },
   },
 });

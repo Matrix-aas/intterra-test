@@ -134,7 +134,7 @@ export default defineComponent({
 
   methods: {
     async processOperationForm(form: OperationForm) {
-      const date = this.$moment(form.date, 'YYYY-MM-DD');
+      const date = (this as any).$moment(form.date, 'YYYY-MM-DD');
 
       await this.operations.service.saveOperation(new Operation({
         id: form.id,
